@@ -7,25 +7,18 @@
 
 import Foundation
 
+//MARK:ERROR ENUM
 enum PlistError: Error {
        case failedToWrite
        case fileDoesNotExist
 }
-
-extension Encodable {
-  func dictionary() throws -> [String: Any] {
-    let data = try JSONEncoder().encode(self)
-    guard let dictionary = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any] else {
-      throw NSError()
-    }
-    return dictionary
-  }
-}
 public class plistManager
 {
-    
+    //MARK:VARIABLE DECLRATION
     private let fileManager = FileManager.default
     let name:String
+    
+    //MARK:INITIALIZATION
     public  init?(named :String) {
         self.name = named
     }
@@ -35,37 +28,36 @@ public class plistManager
         return paths.appending("/\(self.name).plist")
     }
     
-    //GET AND SET THE DICTIONARY DATA INTO PLIST
-
+    //MARK:SAVE DICTIONARY VALUE IN PLIST
+    
     public func saveDatatoPlist<T : Codable>(value: T, using key : String) {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let path = paths.appending("/\(self.name).plist")
         let fileManager = FileManager.default
-        if (!(fileManager.fileExists(atPath: path)))
+        if (!(fileManager.fileExists(atPath: defaultPath())))
         {
             do {
                 let bundlePath : NSString = Bundle.main.path(forResource:  self.name, ofType: "plist")! as NSString
-                try fileManager.copyItem(atPath: bundlePath as String, toPath: path)
+                try fileManager.copyItem(atPath: bundlePath as String, toPath: defaultPath())
             }catch {
                print(error)
             }
         }
-        let plistDict:NSMutableDictionary = NSMutableDictionary(contentsOfFile: path)!
+        let plistDict:NSMutableDictionary = NSMutableDictionary(contentsOfFile: defaultPath())!
         if(type(of: value) is AnyClass){
-            plistDict.setValue(value.dictionary, forKey: key)
+            plistDict.setValue(value, forKey: key)
         }
         else {
             plistDict.setValue(value, forKey: key)
         }
-        plistDict.write(toFile: path, atomically: true)
+        plistDict.write(toFile: defaultPath(), atomically: true)
     }
-    public func getDictionary<T: Decodable>(key : String) -> T {
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
-        let path = paths.appending("/\(self.name).plist")
-        guard fileManager.fileExists(atPath: path) else {
+    
+    //MARK:GET DICTIONARY VALUE IN PLIST
+    public func getDictionary<T>(key : String) -> T {
+       
+        guard fileManager.fileExists(atPath: defaultPath()) else {
             return self as! T
         }
-        let valueOfDictionary = NSDictionary(contentsOfFile: path)
+        let valueOfDictionary = NSDictionary(contentsOfFile: defaultPath())
         let value1 = valueOfDictionary?.object(forKey: key)
         print(value1!)
         return value1 as! T

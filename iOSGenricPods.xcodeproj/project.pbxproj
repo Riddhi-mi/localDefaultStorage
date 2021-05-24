@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8106E56C265BD66900B5A5B4 /* KeychainItemWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8106E56B265BD66900B5A5B4 /* KeychainItemWrapper.swift */; };
 		81659CE4265B694B00ABB409 /* keyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81659CE3265B694B00ABB409 /* keyChainManager.swift */; };
-		81659CFC265B78FE00ABB409 /* userDetails.plist in Resources */ = {isa = PBXBuildFile; fileRef = 81659CFB265B78FE00ABB409 /* userDetails.plist */; };
 		81659D0F265B8B3B00ABB409 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81659D0E265B8B3B00ABB409 /* Encodable.swift */; };
 		81659D23265B9D8F00ABB409 /* plistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81659D22265B9D8F00ABB409 /* plistManager.swift */; };
 		819E57A42657E3B80027AA91 /* iOSGenricPods.h in Headers */ = {isa = PBXBuildFile; fileRef = 819E57A22657E3B80027AA91 /* iOSGenricPods.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -16,8 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8106E56B265BD66900B5A5B4 /* KeychainItemWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainItemWrapper.swift; sourceTree = "<group>"; };
 		81659CE3265B694B00ABB409 /* keyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keyChainManager.swift; sourceTree = "<group>"; };
-		81659CFB265B78FE00ABB409 /* userDetails.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = userDetails.plist; sourceTree = "<group>"; };
 		81659D0E265B8B3B00ABB409 /* Encodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
 		81659D22265B9D8F00ABB409 /* plistManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = plistManager.swift; sourceTree = "<group>"; };
 		819E579F2657E3B80027AA91 /* iOSGenricPods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = iOSGenricPods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -69,8 +69,8 @@
 				819E57A32657E3B80027AA91 /* Info.plist */,
 				819E57AB2657E3C80027AA91 /* defaultManager.swift */,
 				81659CE3265B694B00ABB409 /* keyChainManager.swift */,
-				81659CFB265B78FE00ABB409 /* userDetails.plist */,
 				81659D22265B9D8F00ABB409 /* plistManager.swift */,
+				8106E56B265BD66900B5A5B4 /* KeychainItemWrapper.swift */,
 			);
 			path = iOSGenricPods;
 			sourceTree = "<group>";
@@ -144,7 +144,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				81659CFC265B78FE00ABB409 /* userDetails.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +158,7 @@
 				819E57AC2657E3C80027AA91 /* defaultManager.swift in Sources */,
 				81659D0F265B8B3B00ABB409 /* Encodable.swift in Sources */,
 				81659CE4265B694B00ABB409 /* keyChainManager.swift in Sources */,
+				8106E56C265BD66900B5A5B4 /* KeychainItemWrapper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

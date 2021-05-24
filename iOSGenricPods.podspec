@@ -9,7 +9,7 @@ Pod::Spec.new do |spec|
 
   spec.homepage     = "http://EXAMPLE/iOSGenricPods"
   spec.license      = "MIT"
-  spec.author             = { "Ali Akhtar" => "aliakhtarcs11020@gmail.com" }
+  spec.author             = { "RiddhiPatel" => "riddhi.patel@mindinventory.com" }
   spec.source       = { :path => '.' }
   spec.source_files  = "iOSGenricPods"
   spec.exclude_files = "Classes/Exclude"

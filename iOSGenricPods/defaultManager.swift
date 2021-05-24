@@ -21,6 +21,5 @@ public class defaultManager{
            }
         return self as! T
     }
-   
 }
 

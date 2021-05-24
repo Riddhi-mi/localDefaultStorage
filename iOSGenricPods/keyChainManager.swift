@@ -30,60 +30,44 @@ let kSecMatchLimitValue = NSString(format: kSecMatchLimit)
 let kSecReturnDataValue = NSString(format: kSecReturnData)
 let kSecMatchLimitOneValue = NSString(format: kSecMatchLimitOne)
 
-public class keyChainManager {
 
-    /**
-     * Exposed methods to perform save and load queries.
-     */
+public class keyChainManager {
     public  init?() {
     }
-    public  func savePassword(token: NSString) {
-        
-        keyChainManager.save(service: passwordKey as NSString, data: token)
-    }
-
-    public  func loadPassword() -> NSString? {
-        return keyChainManager.load(service: passwordKey as NSString)
-    }
     
-    /**
-     * Internal methods for querying the keychain.
-     */
-
-    private class func save(service: NSString, data: NSString) {
-        let dataFromString: NSData = data.data(using: String.Encoding.utf8.rawValue, allowLossyConversion: false)! as NSData
-
-        // Instantiate a new default keychain query
-        let keychainQuery: NSMutableDictionary = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, dataFromString], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecValueDataValue])
-
-        // Delete any existing items
-        SecItemDelete(keychainQuery as CFDictionary)
-
-        // Add the new keychain item
-        SecItemAdd(keychainQuery as CFDictionary, nil)
+    public  func setPasscode(identifier: String, passcode: String) {
+        if let dataFromString = passcode.data(using: String.Encoding.utf8) {
+            let keychainQuery = [
+                kSecClassValue: kSecClassGenericPasswordValue,
+                kSecAttrServiceValue: identifier,
+                kSecValueDataValue: dataFromString
+            ] as CFDictionary
+            SecItemDelete(keychainQuery)
+            print(SecItemAdd(keychainQuery, nil))
+        }
+        
+        
     }
 
-    private class func load(service: NSString) -> NSString? {
-        // Instantiate a new default keychain query
-        // Tell the query to return a result
-        // Limit our results to one item
-        let keychainQuery: NSMutableDictionary = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, kCFBooleanTrue ?? false, kSecMatchLimitOneValue], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecReturnDataValue, kSecMatchLimitValue])
-
-        var dataTypeRef :AnyObject?
-
-        // Search for the keychain items
+    public func getPasscode(identifier: String) -> String? {
+        let keychainQuery = [
+            kSecClassValue: kSecClassGenericPasswordValue,
+            kSecAttrServiceValue: identifier,
+            kSecReturnDataValue: kCFBooleanTrue,
+            kSecMatchLimitValue: kSecMatchLimitOneValue
+        ] as  CFDictionary
+        var dataTypeRef: AnyObject?
         let status: OSStatus = SecItemCopyMatching(keychainQuery, &dataTypeRef)
-        var contentsOfKeychain: NSString? = nil
-
-        if status == errSecSuccess {
-            if let retrievedData = dataTypeRef as? NSData {
-                contentsOfKeychain = String(data: retrievedData as Data, encoding: .utf8) as NSString?
+        var passcode: String?
+        if (status == errSecSuccess) {
+            if let retrievedData = dataTypeRef as? Data,
+                let result = String(data: retrievedData, encoding: String.Encoding.utf8) {
+                passcode = result as String
             }
-        } else {
+        }
+        else {
             print("Nothing was retrieved from the keychain. Status code \(status)")
         }
-
-        return contentsOfKeychain
+        return passcode
     }
 }
-
