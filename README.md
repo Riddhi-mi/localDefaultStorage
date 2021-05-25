@@ -20,7 +20,8 @@ pod 'iOSGenricPods', :git => 'https://cocoapods.org/pods/iOSGenricPods'
 ```python
 import iOSGenricPods
 
-User differnt methods for different storages like default, plist or keychain 
+
+## User differnt methods for different storages like default, plist or keychain 
 
 defaultManager().saveValueInDefault.saveValueInDefault(value: "TestValue", using: "TestKey")
 
