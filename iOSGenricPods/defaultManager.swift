@@ -14,12 +14,20 @@ public class defaultManager{
          UserDefaults.standard.setValue(encodedData, forKey: key)
          UserDefaults.standard.synchronize()
      }
-    public func getValue<T: Decodable>(_ key: String) -> T {
-        if let data = UserDefaults.standard.data(forKey: key),
-           let value = try? JSONDecoder().decode(T.self, from: data) {
-               return value
-           }
-        return self as! T
+    public func getValue<T:Codable>(_ key: String) -> T? {
+        if let data = UserDefaults.standard.data(forKey: key)
+        {
+            do{
+                let value = try? JSONDecoder().decode(T.self, from: data)
+                return value
+
+            }
+            catch{
+                return self as? T
+            }
+        }
+        
+        return self as? T
     }
 }
 
