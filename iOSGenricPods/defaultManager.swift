@@ -9,23 +9,15 @@ import UIKit
 public class defaultManager{
     public init(){
     }
-//    public func toOptional<T>(_ key: String) -> T?
-//    {
-//        if(key == ""){
-//            return key as? T
-//        }
-//        else { return nil }
-//    }
 
-    public func saveValueInDefault<T : Codable>(value: T, using key : String) {
-        let encodedData = try! JSONEncoder().encode(value)
-         UserDefaults.standard.setValue(encodedData, forKey: key)
+    public func saveValueInDefault<T>(value: T, using key : String) {
+//        let encodedData = try! JSONEncoder().encode(value)
+         UserDefaults.standard.setValue(value, forKey: key)
          UserDefaults.standard.synchronize()
      }
-    public func getValue<T: Decodable>(_ key: String) -> T? {
-        if let data = UserDefaults.standard.data(forKey: key),
-           let value = try? JSONDecoder().decode(T.self, from: data) {
-               return value
+    public func getValue<T>(_ key: String) -> T? {
+        if let data = UserDefaults.standard.data(forKey: key){
+            return data as? T
            }
         return nil
     }
