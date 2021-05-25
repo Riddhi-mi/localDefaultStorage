@@ -9,20 +9,17 @@ import UIKit
 public class defaultManager{
     public init(){
     }
-
-    public func saveValueInDefault<T>(value: T, using key : String) {
-//        let encodedData = try! JSONEncoder().encode(value)
-         UserDefaults.standard.setValue(value, forKey: key)
+    public func saveValueInDefault<T : Codable>(value: T, using key : String) {
+        let encodedData = try! JSONEncoder().encode(value)
+         UserDefaults.standard.setValue(encodedData, forKey: key)
          UserDefaults.standard.synchronize()
      }
-    public func getValue<T>(_ key: String) -> T? {
-        if let data = UserDefaults.standard.data(forKey: key){
-            return data as? T
+    public func getValue<T: Decodable>(_ key: String) -> T {
+        if let data = UserDefaults.standard.data(forKey: key),
+           let value = try? JSONDecoder().decode(T.self, from: data) {
+               return value
            }
-        return nil
+        return self as! T
     }
-    static func createParser<T>(innerParser:T) -> T {
-        return "OuterParser(innerParser:innerParser)" as! T
-       }
 }
 
