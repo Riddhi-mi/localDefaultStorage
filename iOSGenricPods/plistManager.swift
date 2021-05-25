@@ -43,7 +43,7 @@ public class plistManager
         }
         let plistDict:NSMutableDictionary = NSMutableDictionary(contentsOfFile: defaultPath())!
         if(type(of: value) is AnyClass){
-            plistDict.setValue(value, forKey: key)
+            plistDict.setValue(value.dictionary, forKey: key)
         }
         else {
             plistDict.setValue(value, forKey: key)

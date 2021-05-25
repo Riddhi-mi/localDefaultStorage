@@ -20,13 +20,9 @@ pod 'iOSGenricPods', :git => 'https://cocoapods.org/pods/iOSGenricPods'
 ```python
 import iOSGenricPods
 
-Create object for different storages like default, plist or keychain 
+User differnt methods for different storages like default, plist or keychain 
 
-let manager = defaultManager()
-
-# Now using this object you can access method for storing data locally in UserDefault.
-
-manager.saveValueInDefault(value: "TestValue", using: "TestKey")
+defaultManager().saveValueInDefault.saveValueInDefault(value: "TestValue", using: "TestKey")
 
 # The same way you can get the value by using the object manager
 
