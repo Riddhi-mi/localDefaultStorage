@@ -10,6 +10,9 @@ First, add the following line to your Podfile
 ```bash
 pod install 'iOSGenricPods', '~> 1.0.0’
 
+pod 'iOSGenricPods', :git => 'https://cocoapods.org/pods/iOSGenricPods'
+
+
 ```
 
 ## Usage
@@ -17,7 +20,7 @@ pod install 'iOSGenricPods', '~> 1.0.0’
 ```python
 import iOSGenricPods
 
-# Create object for different storages like default, plist or keychain 
+Create object for different storages like default, plist or keychain 
 
 let manager = defaultManager()
 
@@ -30,10 +33,10 @@ manager.saveValueInDefault(value: "TestValue", using: "TestKey")
 let valueFetch:String = manager.getValue("TestKey")
 
 
-# Define type data Type in which you want to fetch the value and that’s way you can get the stored value.
+## Define type data Type in which you want to fetch the value and that’s way you can get the stored value.
 
 
-# FOLLOW THE SAME STEPS TO ACCESS  THE METHODS FOR STORING AND RETRIEVING DATA FROM THE KEYCHAIN AND PLIST
+## FOLLOW THE SAME STEPS TO ACCESS  THE METHODS FOR STORING AND RETRIEVING DATA FROM THE KEYCHAIN AND PLIST
 
 ```
 
