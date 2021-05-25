@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
   spec.homepage     = "https://github.com/Riddhi-mi/localDefaultStorage"
   spec.license      = { :type => "MIT", :file => "LICENSE" }
   spec.author             = { "RiddhiPatel" => "riddhi.patel@mindinventory.com" }
-  spec.source       = { :git => "https://github.com/jeantimex/SwiftyLib.git", :tag => "#{spec.version}"}
+  spec.source       = { :git => "https://github.com/Riddhi-mi/localDefaultStorage.git", :tag => "#{spec.version}"}
   spec.source_files  = "iOSGenricPods/**/*.{h,m,swift}"
   spec.exclude_files = "Classes/Exclude"
   spec.swift_version = "4.2"
