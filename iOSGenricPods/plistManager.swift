@@ -52,15 +52,15 @@ public class plistManager
     }
     
     //MARK:GET DICTIONARY VALUE IN PLIST
-    public func getDictionary<T>(key : String) -> T {
+    public func getDictionary<T>(key : String) -> T? {
        
         guard fileManager.fileExists(atPath: defaultPath()) else {
-            return self as! T
+            return self as? T
         }
         let valueOfDictionary = NSDictionary(contentsOfFile: defaultPath())
         let value1 = valueOfDictionary?.object(forKey: key)
         print(value1!)
-        return value1 as! T
+        return value1 as? T
     }
    
 }
